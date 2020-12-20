@@ -1,11 +1,10 @@
 
 /* @import '~material-ui/core/styles'; */
-
+* {
+  margin: 0;
+  padding: 0;
+}
 .app {
   /* text-align: center; */
   padding: 20px 30px;
-}
-
-.page {
-  
 }

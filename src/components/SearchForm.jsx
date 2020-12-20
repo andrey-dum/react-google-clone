@@ -14,32 +14,48 @@ function SearchForm ({hideButtons = false}) {
     const [{}, dispatch] = useStateValue();
 
     const [input, setInput] = useState('');
+    const [error, setError] = useState(null);
     const history = useHistory();
+
+    const handleChange = e => {
+        setInput(e.target.value)
+        if (input.length < 1 || input === '') {
+            setError('Enter your search term!')
+        } else {
+            setError(null)
+        }
+    }
 
     const goSearch = event => {
         event.preventDefault();
 
-        dispatch({
-            type: actionTypes.SET_SEARCH_TERM,
-            term: input
-        })
-
-        history.push('/search')
+        if(!error && input !== '') {
+            dispatch({
+                type: actionTypes.SET_SEARCH_TERM,
+                term: input
+            })
+    
+            history.push('/search')
+        } else {
+            setError('Enter your search term!')
+        }
+        
     }
-
+    
 
     return (
         <form className="search">
            <div className="search__input">
                <SearchIcon className="search__inputIcon" />
-                <input value={input} onChange={e => setInput(e.target.value)} type="text"  />
+                <input value={input} onChange={handleChange} type="text"  />
                <MicIcon />
             </div> 
+            { error && <small style={{color: 'red'}}>{error}</small> }
 
             { !hideButtons ? (
                 <div className="search__buttons">
                     <Button type="submit" onClick={goSearch} className="btn" variant="outlined">Google Search</Button>
-                    <Button type="submit" className="btn" variant="outlined">I'm Feeling Lucky</Button>
+                    <Button type="submit" onClick={goSearch} className="btn" variant="outlined">I'm Feeling Lucky</Button>
                     
                 </div>
             ) : (
@@ -52,6 +68,7 @@ function SearchForm ({hideButtons = false}) {
                     >Google Search</Button>
                     <Button 
                         type="submit" 
+                        onClick={goSearch} 
                         className="btn search__buttonsHidden" 
                         variant="outlined"
                     >I'm Feeling Lucky</Button>

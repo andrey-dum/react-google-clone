@@ -1,0 +1,31 @@
+
+.searchPage__options {
+    display: flex;
+    align-items: center;
+    color: gray;
+    flex-basis: 100%;
+    margin-top: 15px;
+}
+.searchPage__option {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+.searchPage__option a {
+    margin-left: 5px;
+}
+.searchPage__optionsRight,
+.searchPage__optionsLeft {
+    display: flex;
+    color: gray;
+    flex-wrap: wrap;
+}
+.searchPage__options a,
+.searchPage__optionsLeft a {
+    text-decoration: none;
+    color: gray;
+}
+
+.searchPage__optionsRight {
+    margin-left: 80px;
+}

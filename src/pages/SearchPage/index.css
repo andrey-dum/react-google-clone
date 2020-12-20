@@ -28,34 +28,49 @@
 
 }
 
-.searchPage__options {
-    display: flex;
-    align-items: center;
-    color: gray;
-    height: 50px;
-    flex-basis: 100%;
-   
+
+.searchPage__results {
+    max-width: 650px;
+    margin-top: 20px;
+    margin-left: 240px;
+    margin-bottom: 100px;
+  
 }
-.searchPage__option {
-    display: flex;
-    align-items: center;
-    margin-right: 20px;
-}
-.searchPage__option a {
-    margin-left: 5px;
-}
-.searchPage__optionsRight,
-.searchPage__optionsLeft {
-    display: flex;
-    color: gray;
-    flex-wrap: wrap;
-}
-.searchPage__options a,
-.searchPage__optionsLeft a {
-    text-decoration: none;
-    color: gray;
+@media screen and (max-width: 700px ) {
+    .searchPage__results {
+        margin-left: 0;
+    }
 }
 
-.searchPage__optionsRight {
-    margin-left: 80px;
+.searchPage__result {
+    margin: 40px 0;
+}
+
+.searchPage__resultsCout {
+    color: #70757a;
+    font-size: 14px;
+}
+
+.searchPage__resultImage {
+    object-fit: contain;
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+}
+
+.searchPage__resultTitle {
+    text-decoration: none;
+    
+}
+.searchPage__resultTitle h2 {
+    font-weight: 500;
+}
+
+.searchPage__resultTitle:hover {
+    text-decoration: underline;
+}
+
+
+.searchPage__resultSnippet {
+    margin-top: 10px;
 }

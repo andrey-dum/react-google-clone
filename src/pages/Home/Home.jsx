@@ -8,7 +8,6 @@ import {Avatar} from '@material-ui/core';
 import SearchForm from '../../components/SearchForm';
 
 
-
 function Home () {
     return (
         <div className="home">

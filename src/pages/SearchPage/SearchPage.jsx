@@ -5,27 +5,24 @@ import { useStateValue } from '../../StateProvider';
 import SearchForm from '../../components/SearchForm';
 import useGoogleSearch from '../../useGoogleSearch';
 
-import Respone from '../../response'
-import SearchIcon from '@material-ui/icons/Search';
-import DescriptionIcon from '@material-ui/icons/Description';
-import ImageIcon from '@material-ui/icons/Image';
-import LocalOfferIcon from '@material-ui/icons/LocalOffer';
-import RoomIcon from '@material-ui/icons/Room';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+// import Response from '../../response'
+import SearchPageOptions from '../../components/SearchPageOptions/SearchPageOptions';
+
 
 
 function SearchPage () {
+   
     const [{term}, dispatch] = useStateValue();
-
+    
     // search
-    //const { data } = useGoogleSearch(term)
-
-    const data = Respone;
-    console.log(data.items);
-
+    const { data } = useGoogleSearch(term)
+    
+    // Example response data 
+    //const data = Response;
     // https://developers.google.com/custom-search/v1/using_rest
     // https://cse.google.com/cse/all
 
+   
     return (
         <div className="search-page">
              
@@ -41,51 +38,44 @@ function SearchPage () {
 
                 <div className="searchPage__headerBody">
                     <SearchForm hideButtons />
-               
 
-                    <div className="searchPage__options">
-                        <div className="searchPage__optionsLeft">
-                            <div className="searchPage__option">
-                                <SearchIcon />
-                                <Link to="/all">All</Link>
-                            </div>
-                            <div className="searchPage__option">
-                                <DescriptionIcon />
-                                <Link to="/news">News</Link>
-                            </div>
-                            <div className="searchPage__option">
-                                <ImageIcon />
-                                <Link to="/images">Images</Link>
-                            </div>
-                            <div className="searchPage__option">
-                                <LocalOfferIcon />
-                                <Link to="/shopping">shopping</Link>
-                            </div>
-                            <div className="searchPage__option">
-                                <RoomIcon />
-                                <Link to="/maps">maps</Link>
-                            </div>
-                            <div className="searchPage__option">
-                                <MoreVertIcon />
-                                <Link to="/more">more</Link>
-                            </div>
-                        </div>
-                        <div className="searchPage__optionsRight">
-                            <div className="searchPage__option">
-                                <Link to="/setting">Setting</Link>
-                            </div>
-                            <div className="searchPage__option">
-                                <Link to="/tools">Tools</Link>
-                            </div>
-                        </div>
-                    </div>
+                    <SearchPageOptions />
                 
-                    </div>
+                </div>
                 
-             </div>
-             <div className="searchPage__results">
+            </div>
+            
+            { term && (
+                <div className="searchPage__results">
+                    <p className="searchPage__resultsCout">
+                        About {data?.searchInformation.formattedTotalResults} results ({data?.searchInformation.formattedSearchTime} seconds) for {term}
+                    </p>
+
+                    { data?.items.map((item, index) => (
+                        <div className="searchPage__result" key={index}>
+                            <a href={item.link}>
+                                {item.pagemap?.cse_image?.length > 0 && item.pagemap?.cse_image[0]?.src && (
+                                    <img
+                                        className="searchPage__resultImage"
+                                        src={item.pagemap?.cse_image[0]?.src}
+                                        alt=""
+                                    />
+                                )}
+
+                                {item.displayLink} 
+                            </a>
+                            <a href={item.link} className="searchPage__resultTitle">
+                                <h2>{item.title}</h2>
+                            </a>
+                            <p className="searchPage__resultSnippet"> 
+                                {item.snippet}
+                            </p>
+
+                        </div>
+                    )) }
 
                 </div>
+            )}               
 
              
 
