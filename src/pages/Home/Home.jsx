@@ -5,7 +5,7 @@ import './index.css';
 
 import AppsIcon from '@material-ui/icons/Apps';
 import {Avatar} from '@material-ui/core';
-import SearchInput from '../../components/SearchInput';
+import SearchForm from '../../components/SearchForm';
 
 
 
@@ -35,7 +35,7 @@ function Home () {
                 
                 <div className="home__inputContainer">
                     <div className="search-field">
-                        <SearchInput />
+                        <SearchForm />
                     </div>
                 </div>
             </div>
